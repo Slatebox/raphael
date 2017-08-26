@@ -148,9 +148,12 @@ define(["./raphael.core"], function(R) {
       );
       return "url('" + locationString + "#" + id + "')";
     },
+    //SLATEBOX - edit for image filling (not tiling patterns) of path elements
     updatePosition = function (o) {
-        var bbox = o.getBBox(1);
-        $(o.pattern, {patternTransform: o.matrix.invert() + " translate(" + bbox.x + "," + bbox.y + ")"});
+        if (!o.data("relativeFill")) {
+          var bbox = o.getBBox(1);
+          $(o.pattern, {patternTransform: o.matrix.invert() + " translate(" + bbox.x + "," + bbox.y + ")"});
+        }
     },
     addArrow = function (o, value, isEnd) {
         if (o.type == "path") {
@@ -217,7 +220,8 @@ define(["./raphael.core"], function(R) {
             if (type != "none") {
                 var pathId = "raphael-marker-" + type,
                     markerId = "raphael-marker-" + se + type + w + h + "-obj" + o.id;
-                if (!R._g.doc.getElementById(pathId)) {
+                //SLATEBOX - addition
+                if (!R._g.doc.getElementById(pathId) || (R._g.doc.getElementById(pathId) && jQuery("#" + pathId).css("display") === "none")) {
                     p.defs.appendChild($($("path"), {
                         "stroke-linecap": "round",
                         d: markers[type],
@@ -487,28 +491,32 @@ define(["./raphael.core"], function(R) {
                         addDashes(o, value, params);
                         break;
                     case "fill":
-                        var isURL = Str(value).match(R._ISURL);
+                        //SLATEBOX a few edits for image filling (not tiling patterns) of path elements
+                        var relativeFill = o.data("relativeFill"),
+                          isURL = Str(value).match(R._ISURL);
                         if (isURL) {
-                            el = $("pattern");
-                            var ig = $("image");
-                            el.id = R.createUUID();
-                            $(el, {x: 0, y: 0, patternUnits: "userSpaceOnUse", height: 1, width: 1});
-                            $(ig, {x: 0, y: 0, "xlink:href": isURL[1]});
-                            el.appendChild(ig);
+                          el = $("pattern");
+                          var ig = $("image");
+                          el.id = R.createUUID();
+                          $(el, {x: 0, y: 0, patternUnits: relativeFill ? "objectBoundingBox" : "userSpaceOnUse", height: 1, width: 1});
+                          $(ig, {x: 0, y: 0, "xlink:href": isURL[1]});
+                          el.appendChild(ig);
 
-                            (function (el) {
-                                R._preload(isURL[1], function () {
-                                    var w = this.offsetWidth,
-                                        h = this.offsetHeight;
-                                    $(el, {width: w, height: h});
-                                    $(ig, {width: w, height: h});
-                                });
-                            })(el);
-                            o.paper.defs.appendChild(el);
-                            $(node, {fill: "url(#" + el.id + ")"});
-                            o.pattern = el;
-                            o.pattern && updatePosition(o);
-                            break;
+                          (function (el) {
+                            R._preload(isURL[1], function () {
+                              var w = this.offsetWidth,
+                                h = this.offsetHeight,
+                                bbox = o.getBBox();
+                              $(el, {width: relativeFill ? 1 : w, height: relativeFill ? 1 : h});
+                              $(ig, {width: relativeFill ? bbox.width : w, height: relativeFill ? bbox.height : h});
+                              o.paper.safari();
+                            });
+                          })(el);
+                          o.paper.defs.appendChild(el);
+                          $(node, {fill: "url(#" + el.id + ")"});
+                          o.pattern = el;
+                          o.pattern && updatePosition(o);
+                          break;
                         }
                         var clr = R.getRGB(value);
                         if (!clr.error) {

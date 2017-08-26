@@ -32,7 +32,7 @@ if(args.indexOf('--min') !== -1){
 }
 
 module.exports = {
-	entry: './dev/raphael.amd.js',
+	entry: './dev/raphael.amd-novml.js',
 	output: {
 		filename: filename + ".js",
 		libraryTarget: "umd",
