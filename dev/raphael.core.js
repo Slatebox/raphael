@@ -3224,6 +3224,7 @@ define(["eve"], function(eve) {
             onend && eve.on("raphael.drag.end." + this.id, onend);
             eve("raphael.drag.start." + this.id, start_scope || move_scope || this, e.clientX + scrollX, e.clientY + scrollY, e);
         }
+        this.start = start; //SLATEBOX - makes text draggable
         this._drag = {};
         draggable.push({el: this, start: start});
         this.mousedown(start);

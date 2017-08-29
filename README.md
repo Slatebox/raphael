@@ -3,9 +3,11 @@ Slatebox Raphael
 
 This repository includes our custom raphael code.
 
-1. `npm install`
-2. `./node_modules/.bin/webpack --no-deps`
-3. Modify `raphael.no-deps.js`...
+1. `brew install bower`
+2. `bower install`
+3. `npm install`
+4. `./node_modules/.bin/webpack`
+5. Modify `raphael.js`...
 
 from:
 
