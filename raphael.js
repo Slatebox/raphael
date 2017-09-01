@@ -8,7 +8,7 @@
 // └───────────────────────────────────────────────────────────────────────────────────────────────────────┘ \\
 
 (function webpackUniversalModuleDefinition(root, factory) {
-	root["Raphael"] = factory();
+		root["Raphael"] = factory();
 })(window, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache

@@ -32,4 +32,4 @@ to
 })(window, function(__WEBPACK_EXTERNAL_MODULE_2__) {
 ```
 
-4. `cp ./raphael.no-deps.js PATH_TO_SLATEBOX_REPO/packages/client/slatebox/lib/raphael/raphael.no-deps.js`
+4. `cp ./raphael.js PATH_TO_SLATEBOX_REPO/packages/client/slatebox/lib/raphael/raphael.js`
