@@ -8,8 +8,15 @@
 // └───────────────────────────────────────────────────────────────────────────────────────────────────────┘ \\
 
 (function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define([], factory);
+	else if(typeof exports === 'object')
+		exports["Raphael"] = factory();
+	else
 		root["Raphael"] = factory();
-})(window, function() {
+})(this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -6421,7 +6428,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                bbox = o.getBBox();
 	                              $(el, {width: relativeFill ? 1 : w, height: relativeFill ? 1 : h});
 	                              $(ig, {width: relativeFill ? bbox.width : w, height: relativeFill ? bbox.height : h});
-	                              o.paper.safari();
 	                            });
 	                          })(el);
 	                          o.paper.defs.appendChild(el);

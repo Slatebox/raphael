@@ -509,7 +509,6 @@ define(["./raphael.core"], function(R) {
                                 bbox = o.getBBox();
                               $(el, {width: relativeFill ? 1 : w, height: relativeFill ? 1 : h});
                               $(ig, {width: relativeFill ? bbox.width : w, height: relativeFill ? bbox.height : h});
-                              o.paper.safari();
                             });
                           })(el);
                           o.paper.defs.appendChild(el);
