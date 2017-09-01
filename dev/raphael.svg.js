@@ -136,17 +136,19 @@ define(["./raphael.core"], function(R) {
       return mode && (mode === 9 || mode === 10);
     },
     fillurl = function (id) {
-      if (isIE9or10()) {
-          return "url('#" + id + "')";
-      }
-      var location = document.location;
-      var locationString = (
-          location.protocol + '//' +
-          location.host +
-          location.pathname +
-          location.search
-      );
-      return "url('" + locationString + "#" + id + "')";
+      //SLATEBOX - always make the fillurl relative to the page, makes svg exports work
+      return "url('#" + id + "')";
+      // if (isIE9or10()) {
+      //     return "url('#" + id + "')";
+      // }
+      // var location = document.location;
+      // var locationString = (
+      //     location.protocol + '//' +
+      //     location.host +
+      //     location.pathname +
+      //     location.search
+      // );
+      // return "url('" + locationString + "#" + id + "')";
     },
     //SLATEBOX - edit for image filling (not tiling patterns) of path elements
     updatePosition = function (o) {
@@ -220,7 +222,7 @@ define(["./raphael.core"], function(R) {
             if (type != "none") {
                 var pathId = "raphael-marker-" + type,
                     markerId = "raphael-marker-" + se + type + w + h + "-obj" + o.id;
-                //SLATEBOX - addition
+                //SLATEBOX - addition to make sure arrows show in svg extract
                 if (!R._g.doc.getElementById(pathId) || (R._g.doc.getElementById(pathId) && jQuery("#" + pathId).css("display") === "none")) {
                     p.defs.appendChild($($("path"), {
                         "stroke-linecap": "round",
