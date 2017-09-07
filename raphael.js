@@ -6419,10 +6419,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	                          (function (el) {
 	                            R._preload(isURL[1], function () {
 	                              var w = this.offsetWidth,
-	                                h = this.offsetHeight,
-	                                bbox = o.getBBox();
+	                                h = this.offsetHeight;
+	                              var tempPath = o.paper.path(o.attr("path"));
+	                              var bbox = tempPath.getBBox();
 	                              $(el, {width: relativeFill ? 1 : w, height: relativeFill ? 1 : h});
-	                              $(ig, {width: w, height: h});
+	                              $(ig, {width: relativeFill ? bbox.width : w, height: relativeFill ? bbox.height : h});
+	                              tempPath.remove();
 	                            });
 	                          })(el);
 	                          o.paper.defs.appendChild(el);
