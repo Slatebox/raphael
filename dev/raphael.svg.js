@@ -510,7 +510,7 @@ define(["./raphael.core"], function(R) {
                                 h = this.offsetHeight,
                                 bbox = o.getBBox();
                               $(el, {width: relativeFill ? 1 : w, height: relativeFill ? 1 : h});
-                              $(ig, {width: relativeFill ? bbox.width : w, height: relativeFill ? bbox.height : h});
+                              $(ig, {width: w, height: h});
                             });
                           })(el);
                           o.paper.defs.appendChild(el);

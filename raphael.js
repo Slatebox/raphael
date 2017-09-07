@@ -8,8 +8,8 @@
 // └───────────────────────────────────────────────────────────────────────────────────────────────────────┘ \\
 
 (function webpackUniversalModuleDefinition(root, factory) {
-		root["Raphael"] = factory();
-})(window, function() {
+  root["Raphael"] = factory(root["eve"]);
+})(window, function(__WEBPACK_EXTERNAL_MODULE_2__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -6422,7 +6422,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                h = this.offsetHeight,
 	                                bbox = o.getBBox();
 	                              $(el, {width: relativeFill ? 1 : w, height: relativeFill ? 1 : h});
-	                              $(ig, {width: relativeFill ? bbox.width : w, height: relativeFill ? bbox.height : h});
+	                              $(ig, {width: w, height: h});
 	                            });
 	                          })(el);
 	                          o.paper.defs.appendChild(el);
