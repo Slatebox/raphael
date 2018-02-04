@@ -8,7 +8,7 @@
 // └───────────────────────────────────────────────────────────────────────────────────────────────────────┘ \\
 
 (function webpackUniversalModuleDefinition(root, factory) {
-		root["Raphael"] = factory();
+    root["Raphael"] = factory(root["eve"]);
 })(window, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -6422,7 +6422,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                h = this.offsetHeight,
 	                                bbox = o.getBBox();
 	                              $(el, {width: relativeFill ? 1 : w, height: relativeFill ? 1 : h});
-	                              $(ig, {width: relativeFill ? bbox.width : w, height: relativeFill ? bbox.height : h});
+	                              //SLATEBOX - image fixes for FF/safari
+	                              $(ig, {width: relativeFill ? (o.imageOrigWidth || bbox.width) : w, height: relativeFill ? (o.imageOrigHeight || bbox.height) : h});
+	                              delete o.imageOrigHeight;
+	                              delete o.imageOrigWidth;
+	                              //end image fixes for SB
 	                            });
 	                          })(el);
 	                          o.paper.defs.appendChild(el);

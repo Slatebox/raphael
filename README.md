@@ -21,7 +21,7 @@ from:
     exports["Raphael"] = factory(require("eve"));
   else
     root["Raphael"] = factory(root["eve"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_2__) {
+})(this, function() {
 ```
 
 to
@@ -29,7 +29,7 @@ to
 ```
 (function webpackUniversalModuleDefinition(root, factory) {
     root["Raphael"] = factory(root["eve"]);
-})(window, function(__WEBPACK_EXTERNAL_MODULE_2__) {
+})(window, function() {
 ```
 
 4. `cp ./raphael.js PATH_TO_SLATEBOX_REPO/packages/client/slatebox/lib/raphael/raphael.js`
