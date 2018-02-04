@@ -32,4 +32,4 @@ to
 })(window, function() {
 ```
 
-4. `cp ./raphael.js PATH_TO_SLATEBOX_REPO/packages/client/slatebox/lib/raphael/raphael.js`
+4. `cp ./raphael.js PATH_TO_SLATEBOX_REPO/packages/slatebox/lib/client/raphael/raphael.js`

@@ -507,13 +507,15 @@ define(["./raphael.core"], function(R) {
                           (function (el) {
                             R._preload(isURL[1], function () {
                               var w = this.offsetWidth,
-                                h = this.offsetHeight,
-                                bbox = o.getBBox();
+                                h = this.offsetHeight;
+                              var tempPath = o.paper.path(o.attr("path"));
+                              var bbox = tempPath.getBBox();
                               $(el, {width: relativeFill ? 1 : w, height: relativeFill ? 1 : h});
                               //SLATEBOX - image fixes for FF/safari
                               $(ig, {width: relativeFill ? (o.imageOrigWidth || bbox.width) : w, height: relativeFill ? (o.imageOrigHeight || bbox.height) : h});
                               delete o.imageOrigHeight;
                               delete o.imageOrigWidth;
+                              tempPath.remove();
                               //end image fixes for SB
                             });
                           })(el);
